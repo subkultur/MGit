@@ -77,6 +77,7 @@
     <string name="tab_file_label">File</string>
     <string name="tab_commits_label">Commits</string>
     <string name="tab_status_label">Status</string>
+    <string name="tab_preview_label">Preview</string>
 
     <!-- Dialog Msg -->
     <string name="dialog_choose_branch_title">Choose Branch</string>

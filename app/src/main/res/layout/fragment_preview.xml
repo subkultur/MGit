@@ -1,0 +1,10 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" >
+
+    <com.yydcdut.markdown.MarkdownTextView
+        android:id="@+id/txt_md_show"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="start|top" />
+</RelativeLayout>

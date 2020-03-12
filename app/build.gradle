@@ -91,4 +91,6 @@ dependencies {
     testImplementation 'junit:junit:4.12'
     testImplementation 'org.robolectric:robolectric:3.5'
     testImplementation 'org.robolectric:shadows-support-v4:3.4-rc2'
+
+    implementation 'com.yydcdut:markdown-processor:0.1.3'
 }

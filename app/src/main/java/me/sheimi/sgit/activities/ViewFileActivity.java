@@ -20,6 +20,7 @@ import me.sheimi.sgit.database.models.Repo;
 import me.sheimi.sgit.dialogs.ChooseLanguageDialog;
 import me.sheimi.sgit.fragments.BaseFragment;
 import me.sheimi.sgit.fragments.CommitsFragment;
+import me.sheimi.sgit.fragments.MarkdownPreviewFragment;
 import me.sheimi.sgit.fragments.ViewFileFragment;
 
 public class ViewFileActivity extends SheimiFragmentActivity {
@@ -29,9 +30,11 @@ public class ViewFileActivity extends SheimiFragmentActivity {
     public static short TAG_MODE_NORMAL = 0;
     public static short TAG_MODE_SSH_KEY = 1;
     private CommitsFragment mCommitsFragment;
+    private MarkdownPreviewFragment mMarkdownPreviewFragment;
     private short mActivityMode = TAG_MODE_NORMAL;
     private static final int FILE_FRAGMENT_INDEX = 0;
     private static final int COMMITS_FRAGMENT_INDEX = 1;
+    private static final int MDPREVIEW_FRAGMENT_INDEX = 2;
     private ViewPager mViewPager;
     private Repo mRepo;
     private TabItemPagerAdapter mTabItemPagerAdapter;
@@ -55,6 +58,7 @@ public class ViewFileActivity extends SheimiFragmentActivity {
         if (mRepo != null) {
             b.putSerializable(Repo.TAG, mRepo);
             mCommitsFragment = CommitsFragment.newInstance(mRepo, FsUtils.getRelativePath(new File(fileName), mRepo.getDir()));
+            mMarkdownPreviewFragment = MarkdownPreviewFragment.newInstance(mRepo, fileName);
         }
         if (mRepo == null) {
             PagerTitleStrip strip = (PagerTitleStrip) findViewById(R.id.pager_title_strip);
@@ -71,7 +75,7 @@ public class ViewFileActivity extends SheimiFragmentActivity {
 
     class TabItemPagerAdapter extends FragmentPagerAdapter implements ViewPager.OnPageChangeListener, SearchView.OnQueryTextListener, MenuItemCompat.OnActionExpandListener {
 
-        private final int[] PAGE_TITLE = { R.string.tab_file_label, R.string.tab_commits_label };
+        private final int[] PAGE_TITLE = { R.string.tab_file_label, R.string.tab_commits_label, R.string.tab_preview_label };
 
         public TabItemPagerAdapter(FragmentManager fm) {
             super(fm);
@@ -84,6 +88,8 @@ public class ViewFileActivity extends SheimiFragmentActivity {
                     return mFileFragment;
                 case COMMITS_FRAGMENT_INDEX:
                     return mCommitsFragment;
+                case MDPREVIEW_FRAGMENT_INDEX:
+                    return mMarkdownPreviewFragment;
             }
             return mFileFragment;
         }
